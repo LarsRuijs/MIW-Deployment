@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: miw-customergateway-container
-          image: docker.io/lars14/miw-customergateway:release0.0.8
+          image: docker.io/lars14/miw-customergateway:release0.0.9
           imagePullPolicy: Always
           envFrom:
           #  - secretRef:

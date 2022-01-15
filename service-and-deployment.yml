@@ -217,7 +217,7 @@ spec:
     spec:
       containers:
         - name: miw-productservice-container
-          image: docker.io/lars14/miw-productservice:release0.0.4:
+          image: docker.io/lars14/miw-productservice:release0.0.4
           imagePullPolicy: Always
           ports:
             - containerPort: 5010
@@ -281,7 +281,7 @@ spec:
     spec:
       containers:
         - name: miw-recommendationsservice-container
-          image: docker.io/lars14/miw-recommendationsservice:release0.0.4:
+          image: docker.io/lars14/miw-recommendationsservice:release0.0.4
           imagePullPolicy: Always
           ports:
             - containerPort: 5012

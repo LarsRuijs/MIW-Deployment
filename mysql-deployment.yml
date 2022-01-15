@@ -28,6 +28,8 @@ spec:
       - image: miwtest2.azurecr.io/mysql:8.0.25
         name: mysql
         env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: Geheim_101
         ports:
         - containerPort: 3306
           name: mysql

@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: miw-customerwebapp-container
-          image: docker.io/lars14/miw-customerwebapp:release0.0.7
+          image: docker.io/lars14/miw-customerwebapp:release0.0.8
           imagePullPolicy: Always
 
 ---
@@ -59,7 +59,7 @@ spec:
     name: miw-customerwebapp
   minReplicas: 1
   maxReplicas: 5
-  targetCPUUtilizationPercentage: 75
+  targetCPUUtilizationPercentage: 15
   
 
 
@@ -89,7 +89,7 @@ spec:
     spec:
       containers:
         - name: miw-customergateway-container
-          image: docker.io/lars14/miw-customergateway:release0.0.9
+          image: docker.io/lars14/miw-customergateway:release0.0.10
           imagePullPolicy: Always
           ports:
             - containerPort: 5002
@@ -123,7 +123,7 @@ spec:
     name: miw-customergateway
   minReplicas: 1
   maxReplicas: 5
-  targetCPUUtilizationPercentage: 75
+  targetCPUUtilizationPercentage: 15
 
 
 
@@ -153,7 +153,7 @@ spec:
     spec:
       containers:
         - name: miw-customerauthservice-container
-          image: docker.io/lars14/miw-customerauthservice:release0.0.4
+          image: docker.io/lars14/miw-customerauthservice:release0.0.5
           imagePullPolicy: Always
           ports:
             - containerPort: 5004
@@ -187,4 +187,132 @@ spec:
     name: miw-customerauthservice
   minReplicas: 1
   maxReplicas: 5
-  targetCPUUtilizationPercentage: 75
+  targetCPUUtilizationPercentage: 15
+
+
+
+---
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miw-productservice
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: miw-productservice-pod 
+  template:
+    metadata:
+      labels:
+        app: miw-productservice-pod
+    spec:
+      containers:
+        - name: miw-productservice-container
+          image: docker.io/lars14/miw-productservice:release0.0.4:
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5010
+              protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: miw-productservice
+spec: 
+  selector:
+    app: miw-productservice-pod
+  ports:
+    - protocol: TCP
+      port: 5010
+      targetPort: 5010
+  type: LoadBalancer
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: miw-productservice-autoscaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: miw-productservice
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 15
+
+
+
+---
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miw-recommendationsservice
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: miw-recommendationsservice-pod 
+  template:
+    metadata:
+      labels:
+        app: miw-recommendationsservice-pod
+    spec:
+      containers:
+        - name: miw-recommendationsservice-container
+          image: docker.io/lars14/miw-recommendationsservice:release0.0.4:
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5012
+              protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: miw-recommendationsservice
+spec: 
+  selector:
+    app: miw-recommendationsservice-pod
+  ports:
+    - protocol: TCP
+      port: 5012
+      targetPort: 5012
+  type: LoadBalancer
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: miw-recommendationsservice-autoscaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: miw-productservice
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 15

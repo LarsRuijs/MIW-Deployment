@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: miw-customerwebapp-container
-          image: docker.io/lars14/miw-customerwebapp:release0.0.8
+          image: docker.io/lars14/miw-customerwebapp:release0.0.9
           imagePullPolicy: Always
 
 ---
@@ -153,7 +153,7 @@ spec:
     spec:
       containers:
         - name: miw-customerauthservice-container
-          image: docker.io/lars14/miw-customerauthservice:release0.0.5
+          image: docker.io/lars14/miw-customerauthservice:release0.0.6
           imagePullPolicy: Always
           ports:
             - containerPort: 5004

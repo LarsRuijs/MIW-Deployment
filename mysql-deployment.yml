@@ -25,7 +25,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: miwtest2.azurecr.io/mysql:latest
+      - image: miwtest2.azurecr.io/mysql:8.0.25
         name: mysql
         env:
         ports:

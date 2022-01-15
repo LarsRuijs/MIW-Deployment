@@ -92,7 +92,7 @@ spec:
           image: docker.io/lars14/miw-customergateway:release0.0.9
           imagePullPolicy: Always
           ports:
-            - containerPort: 5003
+            - containerPort: 5002
               protocol: TCP
 
 ---
@@ -106,8 +106,8 @@ spec:
     app: miw-customergateway-pod
   ports:
     - protocol: TCP
-      port: 5003
-      targetPort: 5003
+      port: 5002
+      targetPort: 5002
   type: LoadBalancer
 
 ---
@@ -156,7 +156,7 @@ spec:
           image: docker.io/lars14/miw-customerauthservice:release0.0.4
           imagePullPolicy: Always
           ports:
-            - containerPort: 5005
+            - containerPort: 5004
               protocol: TCP
 
 ---
@@ -170,8 +170,8 @@ spec:
     app: miw-customerauthservice-pod
   ports:
     - protocol: TCP
-      port: 5005
-      targetPort: 5005
+      port: 5004
+      targetPort: 5004
   type: LoadBalancer
 
 ---

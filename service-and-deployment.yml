@@ -152,7 +152,7 @@ spec:
     spec:
       containers:
         - name: miw-customerauthservice-container
-          image: docker.io/lars14/miw-customerauthservice:release0.0.6
+          image: docker.io/lars14/miw-customerauthservice:release0.0.7
           imagePullPolicy: Always
           ports:
             - containerPort: 5004

@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: miw-customerwebapp-container
-          image: docker.io/lars14/miw-customerwebapp:release0.0.9
+          image: docker.io/lars14/miw-customerwebapp:release0.0.10
           imagePullPolicy: Always
 
 ---
